@@ -16,6 +16,7 @@ function App() {
   const { pathname } = useLocation()
   const current = ROUTES.find((route) => pathname.startsWith(route.path))
   const wide = current?.wide ?? false
+  const compact = pathname === '/session/login'
   const shell = 'mx-auto max-w-6xl px-4'
 
   useEffect(() => {
@@ -50,7 +51,7 @@ function App() {
         </div>
       </header>
       <main className={cn(shell, 'py-6')}>
-        <div className={cn('rounded-xl border border-gray-200 bg-white p-6 shadow-sm', !wide && 'mx-auto max-w-3xl')}>
+        <div className={cn('rounded-xl border border-gray-200 bg-white p-6 shadow-sm', !wide && cn('mx-auto', compact ? 'max-w-md' : 'max-w-3xl'))}>
           <Routes>
             <Route path="/" element={<Navigate to="/todo" replace />} />
             <Route path="/todo" element={<TodoPage />} />

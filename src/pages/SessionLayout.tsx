@@ -18,7 +18,7 @@ function SessionShell() {
 
   return (
     <div className="space-y-6">
-      <h2>Q5: Login & Session Handling</h2>
+      <h2>Login & Session Handling</h2>
       {status === 'authenticated' && user && (
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-gray-200 pb-3">
           <nav aria-label="Session" className="flex gap-4 text-sm">

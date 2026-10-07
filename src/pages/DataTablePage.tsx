@@ -11,7 +11,7 @@ export default function DataTablePage() {
 
   return (
     <section className="space-y-4">
-      <h2>Q4: Data Table</h2>
+      <h2>Data Table</h2>
 
       {state.status === 'loading' && (
         <p role="status" className="py-6 text-center text-gray-500">

@@ -54,7 +54,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="mx-auto max-w-sm space-y-4">
+    <div className="space-y-4">
       <h3>Sign in</h3>
       {sessionExpired && (
         <p role="status" className="rounded-md bg-primary-light p-3 text-sm">

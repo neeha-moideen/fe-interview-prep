@@ -14,13 +14,13 @@ function renderApp(path = '/') {
 describe('App', () => {
   it('opens the todo page by default', () => {
     renderApp()
-    expect(screen.getByRole('heading', { name: 'Q1: Todo App' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Todo App' })).toBeInTheDocument()
   })
 
   it('navigates to another question', async () => {
     renderApp()
     await userEvent.click(screen.getByRole('link', { name: 'Q2 Live Search' }))
-    expect(screen.getByRole('heading', { name: 'Q2: Live Search' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Live Search' })).toBeInTheDocument()
   })
 
   it('numbers every question in the navigation', () => {

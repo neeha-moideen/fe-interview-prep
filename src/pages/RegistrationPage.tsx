@@ -89,7 +89,7 @@ export default function RegistrationPage() {
   if (state.submitted) {
     return (
       <section className="space-y-4">
-        <h2>Q3: Registration Wizard</h2>
+        <h2>Registration Wizard</h2>
         <div role="status" className="space-y-3 rounded-md border border-success p-4">
           <p className="font-medium text-success">Registration complete</p>
           <p className="text-sm text-gray-700">
@@ -104,7 +104,7 @@ export default function RegistrationPage() {
 
   return (
     <section className="space-y-6">
-      <h2>Q3: Registration Wizard</h2>
+      <h2>Registration Wizard</h2>
       <ProgressIndicator step={state.step} />
       {state.step === 0 && (
         <PersonalStep
