@@ -11,7 +11,7 @@ function App() {
     <div className="min-h-screen bg-gray-50 text-gray-900">
       <header className="border-b border-gray-200 bg-white">
         <div className="mx-auto flex max-w-3xl flex-col gap-3 px-4 py-4">
-          <h1 className="text-xl font-semibold">fe-interview-prep</h1>
+          <h1>fe-interview-prep</h1>
           <nav className="flex flex-wrap gap-4 text-sm">
             {ROUTES.map(({ path, label }) => (
               <NavLink

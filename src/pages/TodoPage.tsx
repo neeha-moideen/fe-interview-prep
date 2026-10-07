@@ -26,7 +26,7 @@ export default function TodoPage() {
 
   return (
     <section className="space-y-4">
-      <h2 className="text-xl font-semibold">Q1: Todo App</h2>
+      <h2>Q1: Todo App</h2>
       <TodoForm onAdd={(title) => dispatch({ type: 'add', title })} />
       <TodoFilters
         filter={state.filter}
