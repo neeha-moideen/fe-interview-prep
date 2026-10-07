@@ -16,7 +16,7 @@ describe('Button', () => {
 
   it.each([
     ['primary', 'bg-primary'],
-    ['secondary', 'border-gray-300'],
+    ['secondary', 'border-primary'],
     ['ghost', 'text-primary'],
     ['danger', 'text-error'],
   ] as const)('applies the %s variant', (variant, expectedClass) => {

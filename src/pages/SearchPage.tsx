@@ -8,7 +8,7 @@ export default function SearchPage() {
 
   return (
     <section className="space-y-4">
-      <h2>Q2: Live Search</h2>
+      <h2>Live Search</h2>
       <input
         type="search"
         aria-label="Search products"
