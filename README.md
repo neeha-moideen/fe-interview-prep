@@ -9,7 +9,7 @@ Frontend interview prep assignment: five React + TypeScript features, each shipp
 | 1 | Todo App | [PR #1](https://github.com/neeha-moideen/fe-interview-prep/pull/1) |
 | 2 | Live Search | [PR #2](https://github.com/neeha-moideen/fe-interview-prep/pull/2) |
 | 3 | Registration Wizard | [PR #3](https://github.com/neeha-moideen/fe-interview-prep/pull/3) |
-| 4 | Data Table | |
+| 4 | Data Table | [PR #4](https://github.com/neeha-moideen/fe-interview-prep/pull/4) |
 | 5 | Login & Session Handling | |
 
 **Video:**
@@ -37,3 +37,7 @@ pnpm build
 ## Stack
 
 React 19, TypeScript (strict), Vite, Tailwind CSS, React Router, Vitest and Testing Library.
+
+## Notes
+
+- Q4 loads 600 users from randomuser.me with a fixed seed. The suggested dummyjson.com/users endpoint returns only 208 rows, which is below the 500 the question asks for.
