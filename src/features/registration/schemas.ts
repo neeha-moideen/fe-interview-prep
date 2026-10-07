@@ -16,24 +16,64 @@ export const PLANS = [
 ] as const
 
 const INDIA_POSTAL_CODE = /^\d{6}$/
-const PHONE = /^\+?[0-9\s-]{7,15}$/
+const PHONE_CHARACTERS = /^\+?[\d\s()-]+$/
+const HAS_LETTER = /\p{L}/u
+const MIN_PHONE_DIGITS = 7
+const MAX_PHONE_DIGITS = 15
+const MAX_EMAIL_LENGTH = 254
+const MAX_TEXT_LENGTH = 100
+const MAX_POSTAL_CODE_LENGTH = 20
+
+function isCountry(value: string): boolean {
+  return (COUNTRIES as readonly string[]).includes(value)
+}
+
+function isValidPhone(value: string): boolean {
+  if (!PHONE_CHARACTERS.test(value)) return false
+  const digits = value.replace(/\D/g, '').length
+  return digits >= MIN_PHONE_DIGITS && digits <= MAX_PHONE_DIGITS
+}
+
+function textField(label: string, requiredMessage: string) {
+  return z
+    .string()
+    .trim()
+    .min(1, requiredMessage)
+    .min(2, `${label} must be at least 2 characters`)
+    .max(MAX_TEXT_LENGTH, `${label} must be ${MAX_TEXT_LENGTH} characters or fewer`)
+    .refine((value) => HAS_LETTER.test(value), `${label} must contain letters`)
+}
 
 export const personalSchema = z.object({
-  name: z.string().trim().min(2, 'Enter your full name'),
-  email: z.string().trim().pipe(z.email('Enter a valid email address')),
-  phone: z.string().trim().regex(PHONE, 'Enter a valid phone number'),
+  name: textField('Name', 'Enter your full name'),
+  email: z
+    .string()
+    .trim()
+    .min(1, 'Enter your email address')
+    .max(MAX_EMAIL_LENGTH, `Email must be ${MAX_EMAIL_LENGTH} characters or fewer`)
+    .pipe(z.email('Enter a valid email address')),
+  phone: z
+    .string()
+    .trim()
+    .min(1, 'Enter your phone number')
+    .refine(isValidPhone, 'Enter a valid phone number'),
 })
 
 export const addressSchema = z
   .object({
-    country: z
+    country: z.string().refine(isCountry, 'Select a country'),
+    city: textField('City', 'Enter your city'),
+    postalCode: z
       .string()
-      .refine((value) => (COUNTRIES as readonly string[]).includes(value), 'Select a country'),
-    city: z.string().trim().min(2, 'Enter your city'),
-    postalCode: z.string().trim().min(1, 'Enter your postal code'),
+      .trim()
+      .min(1, 'Enter your postal code')
+      .max(
+        MAX_POSTAL_CODE_LENGTH,
+        `Postal code must be ${MAX_POSTAL_CODE_LENGTH} characters or fewer`,
+      ),
   })
   .superRefine((value, context) => {
-    if (value.country === 'India' && !INDIA_POSTAL_CODE.test(value.postalCode.trim())) {
+    if (value.country === 'India' && !INDIA_POSTAL_CODE.test(value.postalCode)) {
       context.addIssue({
         code: 'custom',
         path: ['postalCode'],

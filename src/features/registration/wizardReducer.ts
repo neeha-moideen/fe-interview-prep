@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import {
   emptyRegistration,
+  firstInvalidStep,
   type Address,
   type PersonalInfo,
   type Preferences,
@@ -54,9 +55,12 @@ export function wizardReducer(state: WizardState, action: WizardAction): WizardS
   switch (action.type) {
     case 'draft':
       return { ...state, data: { ...state.data, [action.section]: action.values } }
-    case 'next':
-      if (state.returnToReview) return { ...state, step: REVIEW_STEP, returnToReview: false }
-      return { ...state, step: Math.min(state.step + 1, REVIEW_STEP) }
+    case 'next': {
+      const target = state.returnToReview ? REVIEW_STEP : state.step + 1
+      const furthestAllowed = firstInvalidStep(state.data) ?? REVIEW_STEP
+      const step = Math.min(target, furthestAllowed)
+      return { ...state, step, returnToReview: step === REVIEW_STEP ? false : state.returnToReview }
+    }
     case 'back':
       return { ...state, step: Math.max(state.step - 1, 0) }
     case 'edit':
