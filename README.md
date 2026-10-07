@@ -1,0 +1,3 @@
+# mock
+
+Mock interview project.
