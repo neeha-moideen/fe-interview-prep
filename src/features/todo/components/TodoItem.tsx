@@ -41,7 +41,6 @@ export default function TodoItem({ todo, onToggle, onEdit, onRemove }: TodoItemP
           autoFocus
           value={draft}
           onChange={(event) => setDraft(event.target.value)}
-          onBlur={save}
           onKeyDown={handleKeyDown}
           className="flex-1 rounded border border-gray-300 px-2 py-1"
         />
@@ -50,19 +49,30 @@ export default function TodoItem({ todo, onToggle, onEdit, onRemove }: TodoItemP
           {todo.title}
         </span>
       )}
-      {!editing && (
-        <button type="button" onClick={startEditing} className="text-sm text-blue-600">
-          Edit
-        </button>
+      {editing ? (
+        <>
+          <button type="button" onClick={save} className="text-sm text-blue-600">
+            Save
+          </button>
+          <button type="button" onClick={() => setEditing(false)} className="text-sm text-gray-600">
+            Cancel
+          </button>
+        </>
+      ) : (
+        <>
+          <button type="button" onClick={startEditing} className="text-sm text-blue-600">
+            Edit
+          </button>
+          <button
+            type="button"
+            aria-label={`Delete ${todo.title}`}
+            onClick={() => onRemove(todo.id)}
+            className="text-sm text-red-600"
+          >
+            Delete
+          </button>
+        </>
       )}
-      <button
-        type="button"
-        aria-label={`Delete ${todo.title}`}
-        onClick={() => onRemove(todo.id)}
-        className="text-sm text-red-600"
-      >
-        Delete
-      </button>
     </li>
   )
 }

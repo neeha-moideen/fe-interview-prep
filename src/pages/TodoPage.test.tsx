@@ -55,6 +55,20 @@ describe('TodoPage', () => {
     expect(screen.queryByText('New title')).not.toBeInTheDocument()
   })
 
+  it('saves an edit with the Save button and discards it with Cancel', async () => {
+    render(<TodoPage />)
+    await addTodo('Draft')
+    await userEvent.click(screen.getByRole('button', { name: 'Edit' }))
+    await userEvent.type(screen.getByLabelText('Edit Draft'), ' one')
+    await userEvent.click(screen.getByRole('button', { name: 'Save' }))
+    expect(screen.getByText('Draft one')).toBeInTheDocument()
+
+    await userEvent.click(screen.getByRole('button', { name: 'Edit' }))
+    await userEvent.type(screen.getByLabelText('Edit Draft one'), ' two')
+    await userEvent.click(screen.getByRole('button', { name: 'Cancel' }))
+    expect(screen.getByText('Draft one')).toBeInTheDocument()
+  })
+
   it('keeps todos and the selected filter after a remount', async () => {
     const first = render(<TodoPage />)
     await addTodo('Persist me')
