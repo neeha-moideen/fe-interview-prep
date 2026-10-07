@@ -7,7 +7,7 @@ Frontend interview prep assignment: five React + TypeScript features, each shipp
 | # | Question | PR link |
 |---|---|---|
 | 1 | Todo App | [PR #1](https://github.com/neeha-moideen/fe-interview-prep/pull/1) |
-| 2 | Live Search | |
+| 2 | Live Search | [PR #2](https://github.com/neeha-moideen/fe-interview-prep/pull/2) |
 | 3 | Registration Wizard | |
 | 4 | Data Table | |
 | 5 | Login & Session Handling | |
