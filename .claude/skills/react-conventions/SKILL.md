@@ -27,7 +27,8 @@ violations in untouched code are backlog, not blockers. Surrounding code is neve
 - Shared helpers, formatters and validators live in `src/lib/` rather than being copied.
 - A route is registered in `src/routes/`, behind a guard when it needs a signed-in user.
 - Styling is Tailwind utilities; no inline styles. Variants come from `class-variance-authority` and
-  classes are merged with `cn()`.
+  classes are merged with `cn()`. Shared colours and fonts are tokens in the `@theme` block of
+  `src/index.css`.
 - A large page is split with `React.lazy()` and `Suspense`.
 
 ## State, data and API
