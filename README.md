@@ -23,7 +23,7 @@ pnpm install
 pnpm dev
 ```
 
-Open http://localhost:5173. Each question has its own route: `/todo`, `/search`, `/register`, `/table`, `/login`.
+Open http://localhost:5173. Each question has its own route: `/todo`, `/search`, `/register`, `/table` and `/session` (login, orders and admin stats).
 
 ## Run the checks
 
@@ -41,3 +41,6 @@ React 19, TypeScript (strict), Vite, Tailwind CSS, React Router, Vitest and Test
 ## Notes
 
 - Q4 loads 600 users from randomuser.me with a fixed seed. The suggested dummyjson.com/users endpoint returns only 208 rows, which is below the 500 the question asks for.
+- Q5 uses a mock backend that runs inside the Vite dev server (`pnpm dev` or `pnpm preview`), so its requests show up in the browser's Network tab. Sign in with `user` / `user123` or `admin` / `admin123`. The access token lasts 30 seconds and the refresh token 10 minutes.
+- Q5 token storage: the access token lives in memory only, and the refresh token is an `HttpOnly`, `SameSite=Strict` cookie that JavaScript cannot read.
+- To see the single refresh call, open the Network tab, sign in, click "Expire access token now" and then "Fire 3 requests at once" on the Orders page. Three requests fail with 401, one `POST /api/auth/refresh` follows, and the three requests succeed on retry.
