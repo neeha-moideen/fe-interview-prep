@@ -1,15 +1,16 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState, type KeyboardEvent } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
+import Button from '@/components/Button/Button'
 import { PLANS, preferencesSchema, type Preferences } from '../schemas'
 import { useDraftSync } from '../useDraftSync'
 import StepActions from './StepActions'
-import { INPUT_CLASS, SECONDARY_BUTTON } from './styles'
+import { INPUT_CLASS } from './styles'
 
 interface PreferencesStepProps {
   defaults: Preferences
   onDraft: (values: Preferences) => void
-  onNext: () => void
+  onNext: (values: Preferences) => void
   onBack: () => void
 }
 
@@ -84,9 +85,9 @@ export default function PreferencesStep({
             aria-describedby={errors.skills ? 'skills-error' : undefined}
             className={INPUT_CLASS}
           />
-          <button type="button" onClick={addSkill} className={SECONDARY_BUTTON}>
+          <Button variant="secondary" onClick={addSkill}>
             Add skill
-          </button>
+          </Button>
         </div>
         {skills.length > 0 && (
           <ul aria-label="Selected skills" className="flex flex-wrap gap-2">

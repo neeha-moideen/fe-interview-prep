@@ -9,7 +9,7 @@ import { INPUT_CLASS } from './styles'
 interface PersonalStepProps {
   defaults: PersonalInfo
   onDraft: (values: PersonalInfo) => void
-  onNext: () => void
+  onNext: (values: PersonalInfo) => void
 }
 
 export default function PersonalStep({ defaults, onDraft, onNext }: PersonalStepProps) {

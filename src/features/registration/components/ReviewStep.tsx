@@ -1,5 +1,5 @@
+import Button from '@/components/Button/Button'
 import { PLANS, type RegistrationData } from '../schemas'
-import { PRIMARY_BUTTON, SECONDARY_BUTTON } from './styles'
 
 interface ReviewStepProps {
   data: RegistrationData
@@ -22,14 +22,9 @@ function ReviewSection({ title, editLabel, onEdit, rows }: ReviewSectionProps) {
     <section className="space-y-2 rounded-md border border-gray-200 p-4">
       <div className="flex items-center justify-between">
         <h3>{title}</h3>
-        <button
-          type="button"
-          aria-label={editLabel}
-          onClick={onEdit}
-          className="rounded px-2 py-1 text-sm text-primary hover:bg-gray-100"
-        >
+        <Button variant="ghost" size="sm" aria-label={editLabel} onClick={onEdit}>
           Edit
-        </button>
+        </Button>
       </div>
       <dl className="grid grid-cols-[8rem_1fr] gap-y-1 text-sm">
         {rows.map((row) => (
@@ -90,12 +85,12 @@ export default function ReviewStep({
         </p>
       )}
       <div className="flex justify-between pt-2">
-        <button type="button" onClick={onBack} disabled={submitting} className={SECONDARY_BUTTON}>
+        <Button variant="secondary" onClick={onBack} disabled={submitting}>
           Back
-        </button>
-        <button type="button" onClick={onSubmit} disabled={submitting} className={PRIMARY_BUTTON}>
+        </Button>
+        <Button onClick={onSubmit} disabled={submitting}>
           {submitting ? 'Submitting...' : 'Submit'}
-        </button>
+        </Button>
       </div>
     </div>
   )

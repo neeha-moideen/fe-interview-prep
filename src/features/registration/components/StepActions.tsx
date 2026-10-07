@@ -1,4 +1,4 @@
-import { PRIMARY_BUTTON, SECONDARY_BUTTON } from './styles'
+import Button from '@/components/Button/Button'
 
 interface StepActionsProps {
   nextLabel: string
@@ -9,15 +9,13 @@ export default function StepActions({ nextLabel, onBack }: StepActionsProps) {
   return (
     <div className="flex justify-between pt-2">
       {onBack ? (
-        <button type="button" onClick={onBack} className={SECONDARY_BUTTON}>
+        <Button variant="secondary" onClick={onBack}>
           Back
-        </button>
+        </Button>
       ) : (
         <span />
       )}
-      <button type="submit" className={PRIMARY_BUTTON}>
-        {nextLabel}
-      </button>
+      <Button type="submit">{nextLabel}</Button>
     </div>
   )
 }

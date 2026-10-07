@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react'
+import Button from '@/components/Button/Button'
 import AddressStep from '@/features/registration/components/AddressStep'
 import PersonalStep from '@/features/registration/components/PersonalStep'
 import PreferencesStep from '@/features/registration/components/PreferencesStep'
 import ProgressIndicator from '@/features/registration/components/ProgressIndicator'
 import ReviewStep from '@/features/registration/components/ReviewStep'
-import { PRIMARY_BUTTON } from '@/features/registration/components/styles'
 import { submitRegistration } from '@/features/registration/registrationApi'
 import {
   firstInvalidStep,
@@ -46,6 +46,27 @@ export default function RegistrationPage() {
   )
   const next = useCallback(() => dispatch({ type: 'next' }), [dispatch])
   const back = useCallback(() => dispatch({ type: 'back' }), [dispatch])
+  const submitPersonal = useCallback(
+    (values: PersonalInfo) => {
+      draftPersonal(values)
+      next()
+    },
+    [draftPersonal, next],
+  )
+  const submitAddress = useCallback(
+    (values: Address) => {
+      draftAddress(values)
+      next()
+    },
+    [draftAddress, next],
+  )
+  const submitPreferences = useCallback(
+    (values: Preferences) => {
+      draftPreferences(values)
+      next()
+    },
+    [draftPreferences, next],
+  )
 
   async function handleSubmit() {
     const invalidStep = firstInvalidStep(state.data)
@@ -75,13 +96,7 @@ export default function RegistrationPage() {
             Thanks, {state.data.personal.name}. A confirmation will be sent to{' '}
             {state.data.personal.email}.
           </p>
-          <button
-            type="button"
-            onClick={() => dispatch({ type: 'reset' })}
-            className={PRIMARY_BUTTON}
-          >
-            Start over
-          </button>
+          <Button onClick={() => dispatch({ type: 'reset' })}>Start over</Button>
         </div>
       </section>
     )
@@ -92,13 +107,17 @@ export default function RegistrationPage() {
       <h2>Q3: Registration Wizard</h2>
       <ProgressIndicator step={state.step} />
       {state.step === 0 && (
-        <PersonalStep defaults={state.data.personal} onDraft={draftPersonal} onNext={next} />
+        <PersonalStep
+          defaults={state.data.personal}
+          onDraft={draftPersonal}
+          onNext={submitPersonal}
+        />
       )}
       {state.step === 1 && (
         <AddressStep
           defaults={state.data.address}
           onDraft={draftAddress}
-          onNext={next}
+          onNext={submitAddress}
           onBack={back}
         />
       )}
@@ -106,7 +125,7 @@ export default function RegistrationPage() {
         <PreferencesStep
           defaults={state.data.preferences}
           onDraft={draftPreferences}
-          onNext={next}
+          onNext={submitPreferences}
           onBack={back}
         />
       )}

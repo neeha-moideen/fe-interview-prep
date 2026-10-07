@@ -10,7 +10,7 @@ import { INPUT_CLASS } from './styles'
 interface AddressStepProps {
   defaults: Address
   onDraft: (values: Address) => void
-  onNext: () => void
+  onNext: (values: Address) => void
   onBack: () => void
 }
 
@@ -32,7 +32,8 @@ export default function AddressStep({ defaults, onDraft, onNext, onBack }: Addre
 
   const country = useWatch({ control, name: 'country' })
   useEffect(() => {
-    if (getFieldState('postalCode').isTouched) void trigger('postalCode')
+    const { error, isTouched } = getFieldState('postalCode')
+    if (error || isTouched) void trigger('postalCode')
   }, [country, getFieldState, trigger])
 
   return (

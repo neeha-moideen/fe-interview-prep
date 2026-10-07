@@ -1,8 +1,11 @@
+import { cn } from '@/lib/cn'
 import { REVIEW_STEP, STEP_LABELS } from '../wizardReducer'
 
 interface ProgressIndicatorProps {
   step: number
 }
+
+const BAR_WIDTH = ['w-1/3', 'w-2/3', 'w-full', 'w-full'] as const
 
 export default function ProgressIndicator({ step }: ProgressIndicatorProps) {
   const total = STEP_LABELS.length
@@ -23,8 +26,8 @@ export default function ProgressIndicator({ step }: ProgressIndicatorProps) {
         className="h-2 w-full overflow-hidden rounded bg-gray-200"
       >
         <div
-          className="h-full bg-primary transition-all"
-          style={{ width: `${reviewing ? 100 : (current / total) * 100}%` }}
+          data-testid="progress-fill"
+          className={cn('h-full bg-primary transition-all', BAR_WIDTH[Math.min(step, REVIEW_STEP)])}
         />
       </div>
       <ol className="flex justify-between text-xs text-gray-500">
@@ -32,7 +35,7 @@ export default function ProgressIndicator({ step }: ProgressIndicatorProps) {
           <li
             key={label}
             aria-current={index === step ? 'step' : undefined}
-            className={index <= step ? 'font-medium text-primary' : ''}
+            className={cn(index <= step && 'font-medium text-primary')}
           >
             {index + 1}. {label}
           </li>
