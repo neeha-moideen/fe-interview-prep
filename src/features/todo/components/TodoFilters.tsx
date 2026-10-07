@@ -20,8 +20,10 @@ export default function TodoFilters({ filter, onChange }: TodoFiltersProps) {
           type="button"
           aria-pressed={filter === value}
           onClick={() => onChange(value)}
-          className={`rounded px-3 py-1 text-sm ${
-            filter === value ? 'bg-blue-600 text-white' : 'bg-gray-100'
+          className={`rounded-md border px-3 py-1 text-sm ${
+            filter === value
+              ? 'border-primary bg-primary-light font-medium text-primary-hover'
+              : 'border-gray-300 text-gray-700 hover:bg-gray-50'
           }`}
         >
           {label}

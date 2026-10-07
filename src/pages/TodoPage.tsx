@@ -33,9 +33,9 @@ export default function TodoPage() {
         onChange={(filter) => dispatch({ type: 'setFilter', filter })}
       />
       {todos.length === 0 ? (
-        <p className="text-gray-500">Nothing to show.</p>
+        <p className="py-6 text-center text-gray-500">Nothing to show.</p>
       ) : (
-        <ul>
+        <ul className="divide-y divide-gray-100">
           {todos.map((todo) => (
             <TodoItem
               key={todo.id}
@@ -47,7 +47,7 @@ export default function TodoPage() {
           ))}
         </ul>
       )}
-      <div className="flex items-center justify-between text-sm">
+      <div className="flex items-center justify-between border-t border-gray-200 pt-3 text-sm text-gray-600">
         <span>
           {remaining} {remaining === 1 ? 'item' : 'items'} left
         </span>
@@ -55,7 +55,7 @@ export default function TodoPage() {
           type="button"
           disabled={!hasCompleted}
           onClick={() => dispatch({ type: 'clearCompleted' })}
-          className="text-blue-600 disabled:text-gray-400"
+          className="text-primary hover:underline disabled:text-gray-400 disabled:no-underline"
         >
           Clear completed
         </button>
